@@ -1,0 +1,3 @@
+add_executable(tests InstructionTests.cpp ../source/core/Chip8.cpp ../source/core/Chip8.h ../source/core/Instruction.cpp ../source/core/Instruction.h ../source/core/RandomGenerator.cpp ../source/core/RandomGenerator.h ../source/core/Memory.cpp ../source/core/Memory.h ../source/core/Display.cpp ../source/core/Display.h ../source/core/Cpu.cpp ../source/core/Cpu.h ../source/core/Keypad.cpp ../source/core/Keypad.h KeypadTests.cpp ../source/core/Timer.cpp ../source/core/Timer.h TimerTests.cpp)
+
+target_link_libraries(tests)
