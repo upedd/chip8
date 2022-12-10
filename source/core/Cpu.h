@@ -90,6 +90,8 @@ private:
 
     void getFontCharacter(uint8_t x);
 
+    void waitForKey(uint8_t x);
+
     Instruction fetch();
 
 public:

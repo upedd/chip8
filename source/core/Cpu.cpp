@@ -115,7 +115,7 @@ void Cpu::cycle() {
                     addToIndexRegister(instruction.getX());
                     break;
                 case 0x0A:
-                    std::cout << "nop wait for key\n";
+                    waitForKey(instruction.getX());
                     break;
                 case 0x29:
                     getFontCharacter(instruction.getX());
@@ -303,9 +303,13 @@ void Cpu::getFontCharacter(uint8_t x) {
     indexRegister = 0x50 + (character * 5);
 }
 
-//void Cpu::waitForKey(uint8_t x) {
-//
-//}
-// #TODO implement no ops
+void Cpu::waitForKey(uint8_t x) {
+    std::optional<uint8_t> lastPress = keypad.getLastPressedKey();
+    if (lastPress.has_value()) {
+        registers[x] = lastPress.value();
+    } else {
+        pc -= 2;
+    }
+}
 // #TODO comment, logging and unit testing
 
