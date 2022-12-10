@@ -203,7 +203,7 @@ void Cpu::rshift(uint8_t x, uint8_t y) {
 
 void Cpu::lshift(uint8_t x, uint8_t y) {
     if (bitshiftLegacyBehaviourQuirk) set(x, registers[y]);
-    registers[0xF] = (registers[x] & 128) > 0;
+    registers[0xF] = (registers[x] & 128) >> 7;
     registers[x] = registers[x] << 1;
 }
 
@@ -243,7 +243,7 @@ void Cpu::draw(uint8_t xIndex, uint8_t yIndex, uint8_t n) {
 
 void Cpu::addToIndexRegister(uint8_t x) {
     indexRegister += registers[x];
-    registers[0xF] = indexRegister > 0x1FF;
+    registers[0xF] = indexRegister > 0x0FFF;
 }
 
 void Cpu::binaryDecimalConversion(uint16_t x) {
