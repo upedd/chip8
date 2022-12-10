@@ -233,7 +233,7 @@ void Cpu::draw(uint8_t xIndex, uint8_t yIndex, uint8_t n) {
             registers[0xF] = registers[0xF] | ((display.getLine(y) & (static_cast<uint64_t>(line) << (56 - x))) > 0);
             display.setLine(y, display.getLine(y) ^ (static_cast<uint64_t>(line) << (56 - x)));
         } else {
-            registers[0xF] = registers[0xF] | ((display.getLine(y) & (static_cast<uint64_t>(line) << (x - 56))) > 0);
+            registers[0xF] = registers[0xF] | ((display.getLine(y) & (static_cast<uint64_t>(line) >> (x - 56))) > 0);
             display.setLine(y, display.getLine(y) ^ (static_cast<uint64_t>(line) >> (x - 56)));
         }
         ++y;
