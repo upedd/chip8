@@ -15,10 +15,7 @@ void setPixels(const Display& display, void* rawPixels) {
         }
     }
 }
-
-// #TODO display issues
 // #TODO sierpinski not working
-// #TODO collision issues? investigate tetris?
 
 int main() {
     Chip8 chip8;
