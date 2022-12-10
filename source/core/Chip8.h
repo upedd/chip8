@@ -4,6 +4,7 @@
 
 #include <array>
 #include <stack>
+#include <utility>
 #include <vector>
 #include <iostream>
 #include "Instruction.h"
@@ -26,10 +27,11 @@ class Chip8 {
 
 
 public:
-    explicit Chip8(std::shared_ptr<RandomGenerator> randomGenerator = std::make_shared<DefaultRandomGenerator>())
-            : memory{}, display{}, delayTimer{}, soundTimer{}, random{std::move(randomGenerator)},
-              cpu{memory, display, keypad, delayTimer, soundTimer, random} {
+    explicit Chip8(std::unique_ptr<RandomGenerator> randomGenerator = std::make_unique<DefaultRandomGenerator>())
+            : memory{}, display{}, delayTimer{}, soundTimer{}, random {std::move(randomGenerator)},
+              cpu{memory, display, keypad, delayTimer, soundTimer} {
         memory.loadFont();
+        cpu.setRandom(random.get());
     };
 
     Cpu &getCpu();

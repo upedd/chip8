@@ -331,6 +331,7 @@ void Cpu::jumpWithOffset(uint16_t address, uint8_t x) {
  * @param value
  */
 void Cpu::generateRandom(uint8_t x, uint8_t value) {
+    assert(random != nullptr && "random in the cpu was not set!");
     registers[x] = random->get() & value;
 }
 
@@ -485,6 +486,10 @@ void Cpu::waitForKey(uint8_t x) {
         // as it was previously incremented in instruction fetching.
         pc -= 2;
     }
+}
+
+void Cpu::setRandom(RandomGenerator *randomGenerator) {
+    random = randomGenerator;
 }
 // #TODO logging and unit testing
 

@@ -17,8 +17,8 @@ class Cpu {
     Timer& delayTimer;
     Timer& soundTimer;
 
-    // #TODO investigate this
-    const std::shared_ptr<RandomGenerator>& random;
+    // #TODO probably could be instead implemented using smart pointers
+    RandomGenerator *random;
 
     uint16_t pc;
     uint16_t indexRegister;
@@ -32,13 +32,14 @@ class Cpu {
     // whatever to increment the index register when performing load or store instructions
     bool loadStoreIncrementIndexQuirk{false};
 public:
-    Cpu(Memory &memory, Display &display, Keypad &keypad, Timer &delayTimer, Timer &soundTimer,
-        const std::shared_ptr<RandomGenerator>& random) : memory{memory}, display{display}, keypad{keypad},
-                                                          delayTimer{delayTimer}, soundTimer{soundTimer}, random{random},
+    Cpu(Memory &memory, Display &display, Keypad &keypad, Timer &delayTimer, Timer &soundTimer) : memory{memory}, display{display}, keypad{keypad},
+                                                          delayTimer{delayTimer}, soundTimer{soundTimer}, random {nullptr},
                                                           pc{0x200}, indexRegister{0}, stack{},
                                                           registers{} {};
 
     void cycle();
+
+    void setRandom(RandomGenerator* randomGenerator);
 private:
     Instruction fetch();
 
